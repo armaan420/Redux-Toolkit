@@ -19,6 +19,8 @@
   padding: 10px 14px;
   height: 60vh;
   margin: auto;
+  display: flex;
+  flex-direction: column;
   background-color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -77,6 +79,9 @@
 }
 
 .footer-btn {
+  position: absolute;
+  bottom: 10px;
+
   background: rgb(101, 171, 228);
   color: rgb(252, 247, 247);
   cursor: pointer;
@@ -84,5 +89,5 @@
   border: none;
   outline: none;
   padding: 10px 0;
-  width: 100%;
+  width: 90%;
 }

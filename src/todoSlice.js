@@ -2,23 +2,21 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const todoSlice = createSlice({
   name: "todoList",
-  initialState: {
-    list: [],
-  },
+  initialState: [],
   reducers: {
     add: (state, action) => {
-      state.list.push(action.payload);
+      state.push(action.payload);
     },
     completed: (state, action) => {
-      state.list.map((task) =>
-        task.id === action.payload ? (task.completed = !task.completed) : ""
-      );
+      state.map((task) => {
+        return task.id === action.payload && (task.completed = !task.completed);
+      });
     },
     remove: (state, action) => {
-      state.list.filter((task) => task.id !== action.id);
+      return state.filter((task) => task.id !== action.payload);
     },
     reset: (state) => {
-      state.list = [];
+      return (state = []);
     },
   },
 });

@@ -7,7 +7,7 @@ import { MdDeleteForever } from "react-icons/md";
 function App() {
   const [text, setText] = useState("");
 
-  const { list } = useSelector((state) => state.todos);
+  const list = useSelector((state) => state.todos);
   const dispatch = useDispatch();
 
   const addTodo = () => {
@@ -26,6 +26,15 @@ function App() {
 
   const toggleTodo = (id) => {
     dispatch(completed(id));
+  };
+
+  const removeTask = (id) => {
+    dispatch(remove(id));
+  };
+
+  const resetTasks = () => {
+    console.log("asdasd");
+    dispatch(reset());
   };
 
   return (
@@ -58,14 +67,14 @@ function App() {
                     onChange={() => toggleTodo(task.id)}
                     value={text}
                   />
-                  <button onClick={() => dispatch(remove(task.id))}>
+                  <button onClick={() => removeTask(task.id)}>
                     <MdDeleteForever />
                   </button>
                 </div>
               </div>
             ))}
         </div>
-        <button onChange={() => dispatch(reset())} className="footer-btn">
+        <button onClick={() => resetTasks()} className="footer-btn">
           Clear
         </button>
       </div>
