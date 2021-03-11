@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { add, remove, completed, reset } from "./todoSlice";
 import "./App.css";
+import { MdDeleteForever } from "react-icons/md";
 
 function App() {
   const [text, setText] = useState("");
@@ -10,17 +11,17 @@ function App() {
   const dispatch = useDispatch();
 
   const addTodo = () => {
-    console.log(text);
-
     setText(" ");
-
-    dispatch(
-      add({
-        text,
-        completed: false,
-        id: Date.now(),
-      })
-    );
+    {
+      text.trim() &&
+        dispatch(
+          add({
+            text: text.trim(),
+            completed: false,
+            id: Date.now(),
+          })
+        );
+    }
   };
 
   const toggleTodo = (id) => {
@@ -43,19 +44,30 @@ function App() {
         <div className="list-container">
           {list &&
             list.map((task) => (
-              <div key={task.id}>
-                <p
+              <div key={task.id} className="task">
+                <li
                   style={{
                     textDecoration: task.completed ? "line-through" : "none",
                   }}
                 >
                   {task.text}
-                </p>
-                <input type="checkbox" onChange={() => toggleTodo(task.id)} />
+                </li>
+                <div className="update-div">
+                  <input
+                    type="checkbox"
+                    onChange={() => toggleTodo(task.id)}
+                    value={text}
+                  />
+                  <button onClick={() => dispatch(remove(task.id))}>
+                    <MdDeleteForever />
+                  </button>
+                </div>
               </div>
             ))}
         </div>
-        <button onChange={() => dispatch(reset())}>Clear</button>
+        <button onChange={() => dispatch(reset())} className="footer-btn">
+          Clear
+        </button>
       </div>
     </div>
   );

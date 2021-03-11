@@ -14,8 +14,8 @@ export const todoSlice = createSlice({
         task.id === action.payload ? (task.completed = !task.completed) : ""
       );
     },
-    remove: (state) => {
-      state.filter((task) => task.id !== task);
+    remove: (state, action) => {
+      state.list.filter((task) => task.id !== action.id);
     },
     reset: (state) => {
       state.list = [];
