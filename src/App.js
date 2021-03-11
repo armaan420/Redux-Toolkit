@@ -10,8 +10,14 @@ function App() {
   const list = useSelector((state) => state.todos);
   const dispatch = useDispatch();
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      addTodo();
+    }
+  };
+
   const addTodo = () => {
-    setText(" ");
+    setText("");
     {
       text.trim() &&
         dispatch(
@@ -45,6 +51,8 @@ function App() {
             placeholder="todo.."
             type="text"
             onChange={(e) => setText(e.target.value)}
+            value={text}
+            onKeyDown={handleKeyDown}
           />
           <button className="btn" onClick={addTodo}>
             Add
